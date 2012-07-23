@@ -684,4 +684,10 @@
     <!-- Title shown in recents popup for showing app in floating mode -->
     <string name="status_bar_recent_floating_item_title">Floating mode</string>
 
+    <!--  PIE -->
+    <string name="pie_date_format">ccc, dd MMM yyyy</string>
+    <string name="pie_hour_format_12">hh:mm</string>
+    <string name="pie_hour_format_24">HH:mm</string>
+    <string name="pie_am_pm">a</string>
+
 </resources>
