@@ -57,6 +57,10 @@ ifeq ($(USE_OPENGL_RENDERER),true)
 		frameworks/rs/cpp \
 		frameworks/rs
 
+ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
+	LOCAL_CFLAGS += -DDONT_DISCARD_FRAMEBUFFER
+endif
+
 	LOCAL_CFLAGS += -DUSE_OPENGL_RENDERER -DGL_GLEXT_PROTOTYPES
 	LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 	LOCAL_SHARED_LIBRARIES := liblog libcutils libutils libGLESv2 libskia libui libRS libRScpp
