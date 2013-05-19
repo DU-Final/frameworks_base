@@ -125,6 +125,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     private Action mSilentModeAction;
     private ToggleAction mAirplaneModeOn;
     private NavBarAction mNavBarHideToggle;
+    private ToggleAction mExpandDesktopModeOn;
 
     private MyAdapter mAdapter;
 
@@ -134,16 +135,18 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     private boolean mIsWaitingForEcmExit = false;
     private boolean mHasTelephony;
     private boolean mHasVibrator;
-    private final boolean mShowSilentToggle;
-
     private boolean mEnableNavBarHideToggle = true;
     private boolean mEnableScreenshotToggle = false;
     private boolean mEnableTorchToggle = false;
     private boolean mEnableAirplaneToggle = true;
     private boolean mEnableVolumeStateToggle = true;
+    private boolean mEnableProfilesToggle = true;
     private boolean mShowRebootOnLock = true;
+    private boolean mShowPowerOnLock = true;
     private static int rebootIndex = 0;
     private Profile mChosenProfile;
+
+    private static final String SYSTEM_PROFILES_ENABLED = "system_profiles_enabled";
 
     /**
      * @param context everything needs a context :(
@@ -176,9 +179,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 mAirplaneModeObserver);
         Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         mHasVibrator = vibrator != null && vibrator.hasVibrator();
-
-        mShowSilentToggle = SHOW_SILENT_TOGGLE && !mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_useFixedVolume);
     }
 
     /**
@@ -237,6 +237,8 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     private GlobalActionsDialog createDialog() {
         mEnableVolumeStateToggle = Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.POWER_DIALOG_SHOW_VOLUME_STATE_TOGGLE, true);
+        mEnableProfilesToggle = Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.POWER_DIALOG_SHOW_PROFILES_TOGGLE, true);
         // Simple toggle style if there's no vibrator, otherwise use a tri-state
         if (!mHasVibrator) {
             mSilentModeAction = new SilentModeToggleAction();
@@ -257,8 +259,32 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         mShowRebootOnLock = Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.POWER_DIALOG_SHOW_REBOOT_KEYGUARD, true);
 
+        mShowPowerOnLock = Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.POWER_DIALOG_SHOW_POWER_KEYGUARD, true);
+
         mEnableAirplaneToggle = Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.POWER_DIALOG_SHOW_AIRPLANE_TOGGLE, true);
+
+        mExpandDesktopModeOn = new ToggleAction(
+                R.drawable.ic_lock_expanded_desktop,
+                R.drawable.ic_lock_expanded_desktop_off,
+                R.string.global_actions_toggle_expanded_desktop_mode,
+                R.string.global_actions_expanded_desktop_mode_on_status,
+                R.string.global_actions_expanded_desktop_mode_off_status) {
+
+            void onToggle(boolean on) {
+                changeExpandDesktopModeSystemSetting(on);
+            }
+
+            public boolean showDuringKeyguard() {
+                return true;
+            }
+
+            public boolean showBeforeProvisioning() {
+                return false;
+            }
+        };
+        onExpandDesktopModeChanged();
 
         mAirplaneModeOn = new ToggleAction(
                 R.drawable.ic_lock_airplane_mode,
@@ -322,7 +348,11 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 }
 
                 public boolean showDuringKeyguard() {
-                    return true;
+                    if (mShowPowerOnLock) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
 
                 public boolean showBeforeProvisioning() {
@@ -351,25 +381,27 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 }
             });
 
-        // next: profile
-        mItems.add(
-            new ProfileChooseAction() {
-                public void onPress() {
-                    createProfileDialog();
-                }
+        // next: profile - only shown if enabled, which is true by default
+        if (Settings.System.getInt(mContext.getContentResolver(), SYSTEM_PROFILES_ENABLED, 1) == 1 && mEnableProfilesToggle) {
+            mItems.add(
+                new ProfileChooseAction() {
+                    public void onPress() {
+                        createProfileDialog();
+                    }
 
-                public boolean onLongPress() {
-                    return true;
-                }
+                    public boolean onLongPress() {
+                        return true;
+                    }
 
-                public boolean showDuringKeyguard() {
-                    return false;
-                }
+                    public boolean showDuringKeyguard() {
+                        return false;
+                    }
 
-                public boolean showBeforeProvisioning() {
-                    return false;
-                }
-            });
+                    public boolean showBeforeProvisioning() {
+                        return false;
+                    }
+                });
+        }
 
         // next: airplane mode
         if (mEnableAirplaneToggle) {
@@ -405,11 +437,12 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             mItems.add(new SinglePressAction(com.android.internal.R.drawable.ic_lock_torch,
                     R.string.global_action_torch) {
                 public void onPress() {
-                    Intent intent = new Intent("android.intent.action.MAIN");
+                    mContext.sendBroadcast(new Intent("net.cactii.flash2.TOGGLE_FLASHLIGHT"));
+                    /*Intent intent = new Intent("android.intent.action.MAIN");
                     intent.setComponent(ComponentName.unflattenFromString("com.aokp.Torch/.TorchActivity"));
                     intent.addCategory("android.intent.category.LAUNCHER");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(intent);
+                    mContext.startActivity(intent);*/
                 }
 
                 public boolean showDuringKeyguard() {
@@ -429,9 +462,16 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             mItems.add(mNavBarHideToggle);
         }
 
+        // next: expanded desktop toggle
+        // only shown if enabled, disabled by default
+        if(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 0) == 1){
+            mItems.add(mExpandDesktopModeOn);
+        }
+
         // next: bug report, if enabled
-        if (Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0) {
+        if (Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0) {
             mItems.add(
                 new SinglePressAction(com.android.internal.R.drawable.stat_sys_adb,
                         R.string.global_action_bug_report) {
@@ -687,7 +727,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         mAirplaneModeOn.updateState(mAirplaneState);
         mAdapter.notifyDataSetChanged();
         mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
-        if (mShowSilentToggle) {
+        if (SHOW_SILENT_TOGGLE) {
             IntentFilter filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
             mContext.registerReceiver(mRingerModeReceiver, filter);
         }
@@ -704,13 +744,8 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
     /** {@inheritDoc} */
     public void onDismiss(DialogInterface dialog) {
-        if (mShowSilentToggle) {
-            try {
-                mContext.unregisterReceiver(mRingerModeReceiver);
-            } catch (IllegalArgumentException ie) {
-                // ignore this
-                Log.w(TAG, ie);
-            }
+        if (SHOW_SILENT_TOGGLE) {
+            mContext.unregisterReceiver(mRingerModeReceiver);
         }
     }
 
@@ -1372,6 +1407,14 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         mAirplaneModeOn.updateState(mAirplaneState);
     }
 
+    private void onExpandDesktopModeChanged() {
+        boolean expandDesktopModeOn = Settings.System.getInt(
+                mContext.getContentResolver(),
+                Settings.System.EXPANDED_DESKTOP_STATE,
+                0) == 1;
+        mExpandDesktopModeOn.updateState(expandDesktopModeOn ? ToggleAction.State.On : ToggleAction.State.Off);
+    }
+
     /**
      * Change the airplane mode system setting
      */
@@ -1387,6 +1430,16 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         if (!mHasTelephony) {
             mAirplaneState = on ? ToggleAction.State.On : ToggleAction.State.Off;
         }
+    }
+
+    /**
+     * Change the expand desktop mode system setting
+     */
+    private void changeExpandDesktopModeSystemSetting(boolean on) {
+        Settings.System.putInt(
+                mContext.getContentResolver(),
+                Settings.System.EXPANDED_DESKTOP_STATE,
+                on ? 1 : 0);
     }
 
     private static final class GlobalActionsDialog extends Dialog implements DialogInterface {

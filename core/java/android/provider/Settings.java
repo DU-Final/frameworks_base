@@ -2593,6 +2593,17 @@ public final class Settings {
          */
         public static final String LOCK_VOLUME_KEYS = "lock_volume_keys";
 
+         /**
+         * Show the power on lockscreen dialog in Power menu
+         * @hide
+         */
+        public static final String POWER_DIALOG_SHOW_POWER_KEYGUARD = "power_dialog_show_power_keyguard";
+
+         /**
+         * @hide
+         */
+        public static final String POWER_DIALOG_SHOW_PROFILES_TOGGLE = "power_dialog_show_profiles_toggle";
+
         /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
@@ -2600,6 +2611,12 @@ public final class Settings {
          * @hide
          */
         public static final String UI_FORCE_OVERFLOW_BUTTON = "ui_force_overflow_button";
+
+        /**
+         * Whether power menu expanded desktop is enabled
+         * @hide
+         */
+        public static final String POWER_MENU_EXPANDED_DESKTOP_ENABLED = "power_menu_expanded_desktop_enabled";
 
         /**
          * AM/PM Style for clock options
@@ -2696,6 +2713,18 @@ public final class Settings {
          * @hide
          */
         public static final String CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+
+         /**
+         * Expanded desktop on/off state
+         * @hide
+         */
+        public static final String EXPANDED_DESKTOP_STATE = "expanded_desktop_state";
+
+        /**
+         * Expanded desktop style (with status bar or without status bar)
+         * @hide
+         */
+        public static final String EXPANDED_DESKTOP_STYLE = "expanded_desktop_style";
 
         /**
          * Sets the alpha of notification wallpaper
