@@ -77,7 +77,8 @@ public class SbBatteryController extends LinearLayout {
     public  static final int BATTERY_STYLE_CIRCLE         = 5;
     public  static final int BATTERY_STYLE_CIRCLE_PERCENT = 6;
     public  static final int BATTERY_STYLE_DOTTED_CIRCLE_PERCENT = 7;
-    public static final int STYLE_HIDE = 8;
+	public static final int STYLE_ICON_AXIOM = 8;
+    public static final int STYLE_HIDE = 9;
 
     public SbBatteryController(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -142,12 +143,19 @@ public class SbBatteryController extends LinearLayout {
         mBatteryStyle = Settings.System.getInt(cr,
                 Settings.System.STATUSBAR_BATTERY_ICON, 0);
         int icon;
-        if (mBatteryStyle == STYLE_ICON_CIRCLE) {
-            icon = plugged ? R.drawable.stat_sys_battery_charge_circle
-                    : R.drawable.stat_sys_battery_circle;
-        } else {
-            icon = plugged ? R.drawable.stat_sys_battery_charge
-                    : R.drawable.stat_sys_battery;
+        switch (mBatteryStyle) {
+            case STYLE_ICON_CIRCLE:
+                 icon = plugged ? R.drawable.stat_sys_battery_charge_circle
+                 : R.drawable.stat_sys_battery_circle;
+                 break;
+            case STYLE_ICON_AXIOM:
+                 icon = plugged ? R.drawable.stat_sys_battery_charge_axiom
+                 : R.drawable.stat_sys_battery_axiom;
+                 break;
+            default:
+                 icon = plugged ? R.drawable.stat_sys_battery_charge
+                 : R.drawable.stat_sys_battery;
+                 break;
         }
         int N = mIconViews.size();
         for (int i = 0; i < N; i++) {
@@ -285,6 +293,12 @@ public class SbBatteryController extends LinearLayout {
                 mBatteryText.setVisibility(View.GONE);
                 mBatteryCenterText.setVisibility(View.GONE);
                 mBatteryIcon.setVisibility(View.GONE);
+                setVisibility(View.VISIBLE);
+                break;
+            case STYLE_ICON_AXIOM:
+                mBatteryText.setVisibility(View.GONE);
+                mBatteryCenterText.setVisibility(View.GONE);
+                mBatteryIcon.setVisibility(View.VISIBLE);
                 setVisibility(View.VISIBLE);
                 break;
             default:
