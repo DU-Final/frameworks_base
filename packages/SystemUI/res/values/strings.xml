@@ -570,6 +570,8 @@
     <string name="halo_signal_bars_1">ONE BAR</string>
     <string name="halo_signal_bars_none">NO BARS</string>
 
+    <!--  AOKP Strings can go here... -->
+
     <!--  App window Strings -->
     <string name="close">Close</string>
     <string name="app_window">Applications</string>
@@ -590,6 +592,7 @@
     <string name="action_notifications">Notifications</string>
     <string name="action_lastapp">Last App</string>
     <string name="action_none">Empty</string>
+
     <string name="widgets">Widgets</string>
     <string name="toggle_quiethours">QuietHours - Toggle</string>
     <string name="toggle_navbar">NavBar - Toggle</string>
@@ -679,13 +682,13 @@
     <!--  Never sleep mode -->
     <string name="powerwidget_screen_timeout_never_toast">Screen set to always on</string>
 
-    <!-- Title shown in recents popup for showing app in floating mode -->
-    <string name="status_bar_recent_floating_item_title">Floating mode</string>
-
     <!--  PIE -->
     <string name="pie_date_format">ccc, dd MMM yyyy</string>
     <string name="pie_hour_format_12">hh:mm</string>
     <string name="pie_hour_format_24">HH:mm</string>
     <string name="pie_am_pm">a</string>
+
+    <!-- Title shown in recents popup for adding an application to the split view -->
+    <string name="status_bar_recent_add_to_split_view">Add to Split View</string>
 
 </resources>
