@@ -277,17 +277,6 @@ public class PhoneStatusBar extends BaseStatusBar {
     // the power widget
     PowerWidget mPowerWidget;
 
-    // Notification Shortcuts
-    ShortcutsWidget mNotificationShortcutsLayout;
-    HorizontalScrollView mNotificationShortcutsScrollView;
-    private boolean mNotificationShortcutsVisible;
-    private boolean mNotificationShortcutsToggle;
-    private boolean mNotificationShortcutsHideCarrier;
-    FrameLayout.LayoutParams lpScrollView;
-    FrameLayout.LayoutParams lpCarrierLabel;
-    int mShortcutsDrawerMargin;
-    int mShortcutsSpacingHeight;
-
     // ticker
     private Ticker mTicker;
     private View mTickerView;
@@ -732,7 +721,6 @@ public class PhoneStatusBar extends BaseStatusBar {
         mPowerWidget.updateVisibility();
         mTransparencyManager.setStatusbar(mStatusBarView);
         updateRibbonTargets();
-        mNotificationShortcutsLayout.setupShortcuts();
 
         mIsAutoBrightNess = checkAutoBrightNess();
         updatePropFactorValue();
