@@ -2632,6 +2632,12 @@ public final class Settings {
         public static final String WEATHER_SHOW_LOCATION = "weather_show_location";
 
         /**
+         * Whether to use the custom quick unlock screen control
+         * @hide
+         */
+        public static final String LOCKSCREEN_COLOR_ALPHA = "lockscreen_color_alpha";
+
+        /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
          * 1 = force on
