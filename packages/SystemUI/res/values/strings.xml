@@ -648,4 +648,7 @@
     <string name="powerwidget_screen_timeout_toast">Screen timeout set to: %1$d %2$s</string>
     <string name="brightness_label">Brightness</string>
 
+    <!--  Weather -->
+    <string name="weatherpanel_slash">/</string>
+
 </resources>
