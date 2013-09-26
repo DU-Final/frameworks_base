@@ -2064,7 +2064,6 @@
   <java-symbol type="string" name="app_killed_message" />
   <java-symbol type="integer" name="config_backKillTimeout" />
 
-<<<<<<< HEAD
 <!-- ==============================================================
      Resources added by The Evervolv Project v3.x.x
      =============================================================== -->
@@ -2079,15 +2078,6 @@
   <java-symbol type="array" name="shutdown_reboot_options" />
   <java-symbol type="array" name="shutdown_reboot_actions" />
 
-=======
-<<<<<<< HEAD
-=======
-  <!-- Expanded desktop -->
-  <java-symbol type="drawable" name="ic_lock_expanded_desktop" /> 
-  <java-symbol type="string" name="global_actions_toggle_expanded_desktop_mode" />
-  <java-symbol type="string" name="global_actions_expanded_desktop_mode_off_status" />
-  <java-symbol type="string" name="global_actions_expanded_desktop_mode_on_status" />
-
   <!-- Power widget -->
   <java-symbol type="string" name="hour" />
   <java-symbol type="string" name="hours" />
@@ -2095,6 +2085,4 @@
   <java-symbol type="string" name="minutes" />
   <java-symbol type="string" name="second" />
   <java-symbol type="string" name="seconds" />
->>>>>>> 2f1537a... Power Widget - picked from SlimBean, originally from CM
->>>>>>> 920e425... Power Widget - picked from SlimBean, originally from CM
 </resources>
