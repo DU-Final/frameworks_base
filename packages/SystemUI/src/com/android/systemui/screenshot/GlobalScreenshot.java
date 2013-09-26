@@ -321,13 +321,9 @@ class SaveImageInBackgroundTask extends AsyncTask<SaveImageInBackgroundData, Voi
  *     type of gallery?
  */
 class GlobalScreenshot {
-<<<<<<< HEAD
     private static final String TAG = "GlobalScreenshot";
 
-    private static final int SCREENSHOT_NOTIFICATION_ID = 789;
-=======
     public static final int SCREENSHOT_NOTIFICATION_ID = 789;
->>>>>>> 6e4f419... ScreenShot QuickTrash
     private static final int SCREENSHOT_FLASH_TO_PEAK_DURATION = 130;
     private static final int SCREENSHOT_DROP_IN_DURATION = 430;
     private static final int SCREENSHOT_DROP_OUT_DELAY = 500;
