@@ -170,10 +170,6 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     private boolean mExpandedDesktop;
 
-    public Ticker getTicker() {
-        return mTicker;
-    }
-
     protected ActiveDisplayView mActiveDisplayView;
 
     public IStatusBarService getStatusBarService() {
