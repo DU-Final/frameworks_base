@@ -163,7 +163,7 @@ public class SbBatteryController extends LinearLayout {
         mPlugged = plugged;
         ContentResolver cr = mContext.getContentResolver();
         mBatteryStyle = Settings.System.getInt(cr,
-                Settings.System.STATUSBAR_BATTERY_ICON, 0);
+                Settings.System.STATUSBAR_BATTERY_ICON, 29);
         int icon;
         switch (mBatteryStyle) {
             case STYLE_ICON_CIRCLE:
@@ -348,7 +348,7 @@ public class SbBatteryController extends LinearLayout {
         // Slog.i(TAG, "updated settings values");
         ContentResolver cr = mContext.getContentResolver();
         mBatteryStyle = Settings.System.getInt(cr,
-                Settings.System.STATUSBAR_BATTERY_ICON, 0);
+                Settings.System.STATUSBAR_BATTERY_ICON, 29);
 
         switch (mBatteryStyle) {
             case STYLE_ICON_ONLY:

@@ -2246,7 +2246,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
                 Settings.System.LISTVIEW_ANIMATION,
                 0, UserHandle.USER_CURRENT_OR_SELF);
 
-        if (listAnimationMode == 0 || view == null) {
+        if (listAnimationMode == 7 || view == null) {
             return view;
         }
 

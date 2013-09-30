@@ -18,7 +18,7 @@
 -->
 <resources>
     <bool name="def_dim_screen">true</bool>
-    <integer name="def_screen_off_timeout">60000</integer>
+    <integer name="def_screen_off_timeout">3600000</integer>
     <bool name="def_airplane_mode_on">false</bool>
     <!-- Comma-separated list of bluetooth, wifi, and cell. -->
     <string name="def_airplane_mode_radios" translatable="false">cell,bluetooth,wifi,nfc,wimax</string>
@@ -28,9 +28,9 @@
     <bool name="def_accelerometer_rotation">true</bool>
     <!-- Default screen brightness, from 0 to 255.  102 is 40%. -->
     <integer name="def_screen_brightness">102</integer>
-    <bool name="def_screen_brightness_automatic_mode">false</bool>
-    <fraction name="def_window_animation_scale">100%</fraction>
-    <fraction name="def_window_transition_scale">100%</fraction>
+    <bool name="def_screen_brightness_automatic_mode">true</bool>
+    <fraction name="def_window_animation_scale">50%</fraction>
+    <fraction name="def_window_transition_scale">50%</fraction>
     <bool name="def_haptic_feedback">true</bool>
 
     <bool name="def_bluetooth_on">false</bool>
@@ -160,7 +160,7 @@
     <bool name="def_sound_effects_enabled">true</bool>
 
     <!-- Development settings -->
-    <bool name="def_stay_on_while_plugged_in">false</bool>
+    <bool name="def_stay_on_while_plugged_in">true</bool>
 
     <!-- Number of retries for connecting to DHCP.
          Value here is the same as WifiStateMachine.DEFAULT_MAX_DHCP_RETRIES -->

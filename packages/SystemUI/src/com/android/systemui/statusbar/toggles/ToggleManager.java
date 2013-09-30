@@ -374,20 +374,16 @@ public class ToggleManager {
     private ArrayList<String> getDefaultTiles() {
         ArrayList<String> tiles = new ArrayList<String>();
         tiles.add(USER_TOGGLE);
-        tiles.add(BRIGHTNESS_TOGGLE);
         tiles.add(SETTINGS_TOGGLE);
+        tiles.add(WIRELESS_ADB_TOGGLE);
         tiles.add(WIFI_TOGGLE);
         if (deviceSupportsTelephony()) {
             tiles.add(SIGNAL_TOGGLE);
         }
-        if (mContext.getResources().getBoolean(R.bool.quick_settings_show_rotation_lock)) {
-            tiles.add(ROTATE_TOGGLE);
-        }
-        tiles.add(BATTERY_TOGGLE);
-        tiles.add(AIRPLANE_TOGGLE);
-        if (deviceSupportsBluetooth()) {
-            tiles.add(BLUETOOTH_TOGGLE);
-        }
+        tiles.add(MUSIC_TOGGLE);
+        tiles.add(HALO_TOGGLE);
+        tiles.add(REBOOT_TOGGLE);
+        tiles.add(STAYAWAKE_TOGGLE);
         return tiles;
     }
 
