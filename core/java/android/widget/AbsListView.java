@@ -2244,9 +2244,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         int listAnimationMode = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
                 Settings.System.LISTVIEW_ANIMATION,
-                0, UserHandle.USER_CURRENT_OR_SELF);
+                2, UserHandle.USER_CURRENT_OR_SELF);
 
-        if (listAnimationMode == 7 || view == null) {
+        if (listAnimationMode == 4 || view == null) {
             return view;
         }
 
@@ -2256,7 +2256,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         int listAnimationInterpolatorMode = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
                 Settings.System.LISTVIEW_INTERPOLATOR,
-                0, UserHandle.USER_CURRENT_OR_SELF);
+                1, UserHandle.USER_CURRENT_OR_SELF);
 
         try {
             scrollY = getChildAt(0).getTop();

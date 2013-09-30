@@ -91,8 +91,8 @@ public class NotificationPanelView extends PanelView {
                         Settings.System.FAST_TOGGLE, false);
                 mToggleStyle = Settings.System.getInt(resolver,
                         Settings.System.TOGGLES_STYLE, 0);
-                mSwipeToSwitch = mToggleStyle > 1 ? false : Settings.System.getBoolean(resolver,
-                        Settings.System.SWIPE_TO_SWITCH, false);
+                mSwipeToSwitch = mToggleStyle > 1 ? true : Settings.System.getBoolean(resolver,
+                        Settings.System.SWIPE_TO_SWITCH, true);
             }
         };
 
@@ -111,8 +111,8 @@ public class NotificationPanelView extends PanelView {
                 Settings.System.CHOOSE_FASTTOGGLE_SIDE, 1);
         mToggleStyle = Settings.System.getInt(resolver,
                 Settings.System.TOGGLES_STYLE, 0);
-        mSwipeToSwitch = mToggleStyle > 1 ? false : Settings.System.getBoolean(resolver,
-                Settings.System.SWIPE_TO_SWITCH, false);
+        mSwipeToSwitch = mToggleStyle > 1 ? true : Settings.System.getBoolean(resolver,
+                Settings.System.SWIPE_TO_SWITCH, true);
 
         resolver.registerContentObserver(
                 Settings.System.getUriFor(Settings.System.FAST_TOGGLE),
