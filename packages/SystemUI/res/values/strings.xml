@@ -680,4 +680,8 @@
     <!--  Weather -->
     <string name="weatherpanel_slash">/</string>
 
+    <!--  Never sleep mode -->
+    <string name="powerwidget_screen_timeout_never_toast">Screen set to always on</string>
+    <string name="quick_settings_screen_timeout_summary_never">Never</string>
+
 </resources>

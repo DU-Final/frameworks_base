@@ -1511,9 +1511,7 @@ public final class PowerManagerService extends IPowerManager.Stub
 
     private int getScreenOffTimeoutLocked() {
         int timeout = mScreenOffTimeoutSetting;
-        if (timeout == mMaximumScreenOffTimeoutFromDeviceAdmin) {
-            /** Skip Math.min()'s to force MAX_VALUE for SCREEN_OFF_TIMEOUT */
-        } else {
+        if (timeout != mMaximumScreenOffTimeoutFromDeviceAdmin) {
             if (isMaximumScreenOffTimeoutFromDeviceAdminEnforcedLocked()) {
                 timeout = Math.min(timeout, mMaximumScreenOffTimeoutFromDeviceAdmin);
             }
