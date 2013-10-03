@@ -70,6 +70,15 @@
          is disableable for products for which it is irrelevant. -->
     <bool name="config_useVolumeKeySounds">true</bool>
 
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveBatteryLed">true</bool>
+
+     <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
+    <bool name="config_multiColorBatteryLed">true</bool>
+
+     <!-- Disable the home key unlock setting -->
+    <bool name="config_disableHomeUnlockSetting">false</bool>
+
     <!-- Array of integer pairs controlling the rate at which the master volume changes
          in response to volume up and down key events.
          The first integer of each pair is compared against the current master volume
@@ -295,6 +304,20 @@
 
     <!-- Integer indicating wpa_supplicant scan interval when p2p is connected in milliseconds -->
     <integer translatable="false" name="config_wifi_scan_interval_p2p_connected">60000</integer>
+
+    <!-- Hardware 'face' keys present on the device, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following keys present:
+             1 - Home
+             2 - Back
+             4 - Menu
+             8 - Assistant (search)
+            16 - App switch
+         For example, a device with Home, Back and Menu keys would set this
+         config to 7. -->
+    <integer name="config_deviceHardwareKeys">0</integer>
+
+
 
     <!-- Integer indicating the framework scan interval in milliseconds. This is used in the scenario
          where the chipset does not support background scanning (config_wifi_background_scan_suport
