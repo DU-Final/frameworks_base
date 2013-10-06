@@ -267,6 +267,9 @@ public class PhoneStatusBar extends BaseStatusBar {
     // the date view
     DateView mDateView;
 
+    // Carrier
+    private boolean mShowCarrierLabel;
+
     // for immersive activities
     private IntruderAlertView mIntruderAlertView;
 
@@ -1493,6 +1496,17 @@ public class PhoneStatusBar extends BaseStatusBar {
         }
     }
 
+    public void showCarrierLabel(boolean show) {
+        if (mStatusBarView == null) return;
+        ContentResolver resolver = mContext.getContentResolver();
+        View statusCarrierLabel = mStatusBarView.findViewById(R.id.status_carrier_label);
+        mShowCarrierLabel = (Settings.System.getInt(resolver,
+                Settings.System.STATUS_BAR_CARRIER, 0) == 1);
+        if (statusCarrierLabel != null) {
+            statusCarrierLabel.setVisibility(show ? (mShowCarrierLabel ? View.VISIBLE : View.GONE) : View.GONE);
+        }
+    }
+
     /**
      * State is one or more of the DISABLE constants from StatusBarManager.
      */
@@ -1560,6 +1574,8 @@ public class PhoneStatusBar extends BaseStatusBar {
         if ((diff & StatusBarManager.DISABLE_CLOCK) != 0) {
             boolean show = (state & StatusBarManager.DISABLE_CLOCK) == 0;
             showClock(show);
+            //add CarrierLabel
+            showCarrierLabel(show);
         }
         if ((diff & StatusBarManager.DISABLE_EXPAND) != 0) {
             if ((state & StatusBarManager.DISABLE_EXPAND) != 0) {
@@ -2346,6 +2362,7 @@ public class PhoneStatusBar extends BaseStatusBar {
             final View battery = mStatusBarView.findViewById(R.id.battery);
             final View clock = mStatusBarView.findViewById(R.id.clock);
             final View traffic = mStatusBarView.findViewById(R.id.traffic);
+            final View statusCarrierLabel = mStatusBarView.findViewById(R.id.status_carrier_label);
 
             final AnimatorSet lightsOutAnim = new AnimatorSet();
             lightsOutAnim.playTogether(
@@ -3087,6 +3104,8 @@ public class PhoneStatusBar extends BaseStatusBar {
                     Settings.System.WEATHER_PANEL_SHORTCLICK), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.WEATHER_PANEL_LONGCLICK), false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_CARRIER), false, this);
         }
 
          @Override
@@ -3106,6 +3125,10 @@ public class PhoneStatusBar extends BaseStatusBar {
 
         mClockActions[shortClick] = Settings.System.getString(cr,
                 Settings.System.NOTIFICATION_CLOCK[shortClick]);
+
+        mShowCarrierLabel = Settings.System.getInt(
+                    cr, Settings.System.STATUS_BAR_CARRIER, 0) == 1;
+        showCarrierLabel(mShowCarrierLabel);
 
         mClockActions[longClick] = Settings.System.getString(cr,
                 Settings.System.NOTIFICATION_CLOCK[longClick]);

@@ -2790,6 +2790,12 @@ public final class Settings {
         public static final String QUICK_SETTINGS_BACKGROUND_PRESSED_COLOR = "quick_settings_background_pressed_color";
 
         /**
+         * MIUI Style carrier text in the statusbar
+         * @hide
+         */
+        public static final String STATUS_BAR_CARRIER = "status_bar_carrier";
+
+        /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
          * 1 = force on
