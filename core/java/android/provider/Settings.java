@@ -2796,6 +2796,18 @@ public final class Settings {
         public static final String STATUS_BAR_CARRIER = "status_bar_carrier";
 
         /**
+         * Whether to show the network status in the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_NETWORK_STATS = "status_bar_network_stats";
+
+        /**
+         * Frequency at which stats are updated, in milliseconds
+         * @hide
+         */
+        public static final String STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL = "status_bar_network_stats_update_frequency";
+
+        /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
          * 1 = force on
@@ -2871,12 +2883,6 @@ public final class Settings {
          * @hide
          */
         public static final String STATUSBAR_NOTIF_COUNT = "status_bar_notif_count";
-
-        /**
-         * Network speed indicator
-         * @hide
-         */
-        public static final String STATUS_BAR_TRAFFIC = "status_bar_traffic"; 
 
         /**
          * Whether to show the battery bar

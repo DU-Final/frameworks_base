@@ -2361,7 +2361,6 @@ public class PhoneStatusBar extends BaseStatusBar {
             final View signal = mStatusBarView.findViewById(R.id.signal_cluster);
             final View battery = mStatusBarView.findViewById(R.id.battery);
             final View clock = mStatusBarView.findViewById(R.id.clock);
-            final View traffic = mStatusBarView.findViewById(R.id.traffic);
             final View statusCarrierLabel = mStatusBarView.findViewById(R.id.status_carrier_label);
 
             final AnimatorSet lightsOutAnim = new AnimatorSet();
@@ -2370,8 +2369,7 @@ public class PhoneStatusBar extends BaseStatusBar {
                     ObjectAnimator.ofFloat(systemIcons, View.ALPHA, 0),
                     ObjectAnimator.ofFloat(signal, View.ALPHA, 0),
                     ObjectAnimator.ofFloat(battery, View.ALPHA, 0.5f),
-                    ObjectAnimator.ofFloat(clock, View.ALPHA, 0.5f),
-                    ObjectAnimator.ofFloat(traffic, View.ALPHA, 0.5f)
+                    ObjectAnimator.ofFloat(clock, View.ALPHA, 0.5f)
                 );
             lightsOutAnim.setDuration(750);
 
@@ -2381,8 +2379,7 @@ public class PhoneStatusBar extends BaseStatusBar {
                     ObjectAnimator.ofFloat(systemIcons, View.ALPHA, 1),
                     ObjectAnimator.ofFloat(signal, View.ALPHA, 1),
                     ObjectAnimator.ofFloat(battery, View.ALPHA, 1),
-                    ObjectAnimator.ofFloat(clock, View.ALPHA, 1),
-                    ObjectAnimator.ofFloat(traffic, View.ALPHA, 1)
+                    ObjectAnimator.ofFloat(clock, View.ALPHA, 1)
                 );
             lightsOnAnim.setDuration(250);
 
