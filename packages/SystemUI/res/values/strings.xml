@@ -603,8 +603,6 @@
     <string name="toggle_ring_silent">Ring/Silent - Toggle</string>
     <string name="toggle_ring_vib_silent">Ring/Vib/Silent - Toggle</string>
     <string name="app_killed_message">App Killed</string>
-    <string name="recents_kill_all_button_text">Kill all</string>
-    <string name="recents_google_now_button_text">Google Now</string>
     <string name="screenshot_toast">Screenshot in %1$d seconds</string>
 
     <!--  Quick Settings -->
@@ -682,5 +680,8 @@
 
     <!--  Never sleep mode -->
     <string name="powerwidget_screen_timeout_never_toast">Screen set to always on</string>
+
+    <!-- Title shown in recents popup for showing app in floating mode -->
+    <string name="status_bar_recent_floating_item_title">Floating mode</string>
 
 </resources>

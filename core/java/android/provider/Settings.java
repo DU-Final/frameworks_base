@@ -2802,6 +2802,20 @@ public final class Settings {
         public static final String STATUS_BAR_NETWORK_STATS = "status_bar_network_stats";
 
         /**
+         * Switch between different recents style
+         *
+         * @hide
+         */
+        public static final String RECENTS_STYLE = "recents_style";
+
+        /**
+         * Choose kill-all location in recents
+         *
+         * @hide
+         */
+        public static final String RECENTS_CLEAR = "recents_clear";
+
+        /**
          * Frequency at which stats are updated, in milliseconds
          * @hide
          */

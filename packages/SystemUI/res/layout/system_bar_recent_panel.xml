@@ -41,16 +41,15 @@
         <com.android.systemui.recent.RecentsVerticalScrollView android:id="@+id/recents_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/status_bar_recents_right_glow_margin"
+            android:layout_marginRight="@dimen/status_bar_recents_right_glow_margin"
             android:divider="@null"
             android:stackFromBottom="true"
             android:fadingEdge="vertical"
             android:scrollbars="none"
             android:fadingEdgeLength="20dip"
-            android:layout_gravity="bottom|start"
+            android:layout_gravity="bottom|left"
             android:clipToPadding="false"
-            android:clipChildren="false"
-            android:fitsSystemWindows="true">
+            android:clipChildren="false">
 
             <LinearLayout android:id="@+id/recents_linear_layout"
                 android:layout_width="wrap_content"
@@ -62,13 +61,34 @@
 
         </com.android.systemui.recent.RecentsVerticalScrollView>
 
-        <Button android:id="@+id/recents_kill_all_button"
-            android:layout_gravity="bottom|left"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
+    <ImageView android:id="@+id/recents_kill_all_buttonBR"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="30dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/recents_kill_all_button_text"/>
+            android:src="@drawable/ic_recents_clear" />
+    <ImageView android:id="@+id/recents_kill_all_buttonBL"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_recents_clear" />
+    <ImageView android:id="@+id/recents_kill_all_buttonTR"
+            android:layout_gravity="top|right"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_recents_clear" />
+    <ImageView android:id="@+id/recents_kill_all_buttonTL"
+            android:layout_gravity="top|left"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_recents_clear" />
 
     <view class="com.android.systemui.recent.LinearColorBar"
             android:id="@+id/ram_usage_bar"
@@ -121,7 +141,7 @@
             android:id="@+id/recents_no_apps"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="58dip"
+            android:layout_marginLeft="58dip"
             android:layout_marginBottom="36dip"
             android:visibility="invisible" />
 
@@ -132,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="@*android:dimen/system_bar_height"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
     />
 
 
