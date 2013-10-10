@@ -248,6 +248,14 @@
                     android:scaleType="center"
                     android:src="@drawable/ic_shortcut_twitter" />
 
+                <ImageView
+                    android:id="@+id/shortcut_googleplus"
+                    android:clickable="true"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_shortcut_googleplus" />
+
                 <ImageView 
                     android:id="@+id/recents_kill_all_buttonBL"
                     android:clickable="true"
