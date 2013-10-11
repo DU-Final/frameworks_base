@@ -2822,6 +2822,12 @@ public final class Settings {
         public static final String STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL = "status_bar_network_stats_update_frequency";
 
         /**
+         * Pie power, should default to 0 (no, show only when needed)
+         * @hide
+         */
+        public static final String PIE_POWER = "pie_power";
+
+        /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
          * 1 = force on
