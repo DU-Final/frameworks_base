@@ -1250,6 +1250,5 @@
              8 - Assistant (search)
             16 - App switch
          For example, a device with Home, Back and Menu keys would set to config to 7. -->
-    <integer name="config_deviceHardwareKeys">15</integer>
-
+    <integer name="config_deviceHardwareKeys">7</integer>
 </resources>
