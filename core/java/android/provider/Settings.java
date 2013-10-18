@@ -2914,6 +2914,68 @@ public final class Settings {
         public static final String PIE_POWER = "pie_power";
 
         /**
+         * Whether to enable custom rebindings of the actions performed on
+         * certain key press events.
+         * @hide
+         */
+        public static final String HARDWARE_KEY_REBINDING = "hardware_key_rebinding";
+
+         /**
+          * Action to perform when the home key is long-pressed. (Default is 2)
+          * 0 - Nothing
+          * 1 - Menu
+          * 2 - App-switch
+          * 3 - Search
+          * 4 - Voice search
+          * 5 - In-app search
+          * @hide
+          */
+         public static final String KEY_HOME_LONG_PRESS_ACTION = "key_home_long_press_action";
+
+         /**
+          * Action to perform when the menu key is pressed. (Default is 1)
+          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
+          * @hide
+          */
+         public static final String KEY_MENU_ACTION = "key_menu_action";
+
+         /**
+          * Action to perform when the menu key is long-pressed.
+          * (Default is 0 on devices with a search key, 3 on devices without)
+          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
+          * @hide
+          */
+         public static final String KEY_MENU_LONG_PRESS_ACTION = "key_menu_long_press_action";
+
+         /**
+          * Action to perform when the assistant (search) key is pressed. (Default is 3)
+          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
+          * @hide
+          */
+         public static final String KEY_ASSIST_ACTION = "key_assist_action";
+
+         /**
+          * Action to perform when the assistant (search) key is long-pressed. (Default is 4)
+          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
+          * @hide
+          */
+         public static final String KEY_ASSIST_LONG_PRESS_ACTION = "key_assist_long_press_action";
+
+         /**
+          * Action to perform when the app switch key is pressed. (Default is 2)
+          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
+          * @hide
+          */
+         public static final String KEY_APP_SWITCH_ACTION = "key_app_switch_action";
+
+         /**
+          * Action to perform when the app switch key is long-pressed. (Default is 0)
+          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
+          * @hide
+          */
+         public static final String KEY_APP_SWITCH_LONG_PRESS_ACTION = "key_app_switch_long_press_action";
+
+        /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
          * 1 = force on
@@ -3403,6 +3465,81 @@ public final class Settings {
         * @hide
         */
         public static final String NAVIGATION_BAR_LEFTY_MODE = "navigation_bar_lefty_mode";
+
+        /**
+         * Soft key actions for Home
+         * 0 == single click
+         * 1 == long click
+         * 2 == double click
+         * @hide
+         */
+        public static final String[] SOFT_KEY_HOME = new String[] {
+                "soft_key_home_single",
+                "soft_key_home_long",
+                "soft_key_home_double",
+        };
+
+        /**
+         * Soft key actions for Menu
+         * 0 == single click
+         * 1 == long click
+         * 2 == double click
+         * @hide
+         */
+        public static final String[] SOFT_KEY_MENU = new String[] {
+                "soft_key_menu_single",
+                "soft_key_menu_long",
+                "soft_key_menu_double",
+        };
+
+        /**
+         * Soft key actions for Back
+         * 0 == single click
+         * 1 == long click
+         * 2 == double click
+         * @hide
+         */
+        public static final String[] SOFT_KEY_BACK = new String[] {
+                "soft_key_back_single",
+                "soft_key_back_long",
+                "soft_key_back_double",
+        };
+
+        /**
+         * Soft key actions for Recents
+         * 0 == single click
+         * 1 == long click
+         * 2 == double click
+         * @hide
+         */
+        public static final String[] SOFT_KEY_APPSWITCH = new String[] {
+                "soft_key_appswitch_single",
+                "soft_key_appswitch_long",
+                "soft_key_appswitch_double",
+        };
+
+        /**
+         * Soft key actions for Search
+         * 0 == single click
+         * 1 == long click
+         * 2 == double click
+         * @hide
+         */
+        public static final String[] SOFT_KEY_SEARCH = new String[] {
+                "soft_key_search_single",
+                "soft_key_search_long",
+                "soft_key_search_double",
+        };
+
+         /**
+         * @hide
+         */
+        public static final String SOFT_KEY_ENABLE = "soft_key_enable";
+
+         /**
+         * @hide
+         */
+        public static final String SOFT_KEY_ENABLE_DOUBLE_CLICK = "soft_key_enable_double_click";
 
         /**
          * Custom Spen Actions
