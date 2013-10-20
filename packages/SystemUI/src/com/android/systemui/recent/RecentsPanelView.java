@@ -206,7 +206,7 @@ public class RecentsPanelView extends FrameLayout implements OnClickListener, On
 
         public View createView(ViewGroup parent) {
            mRecentStyle = Settings.System.getInt(mContext.getContentResolver(),
-                 Settings.System.RECENTS_STYLE, 0);
+                 Settings.System.RECENTS_STYLE, 1);
            View convertView = mInflater.inflate(mRecentItemLayoutId, parent, false);
            ViewHolder holder = new ViewHolder();
            switch (mRecentStyle) {
@@ -1114,7 +1114,7 @@ public class RecentsPanelView extends FrameLayout implements OnClickListener, On
         ramBarEnabled = Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.RAM_USAGE_BAR, false);
         mRecentClear = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.RECENTS_CLEAR, 0);
+                Settings.System.RECENTS_CLEAR, 2);
 
         if (mRamUsageBar != null) {
             mRamUsageBar.setVisibility(ramBarEnabled ? View.VISIBLE : View.GONE);
