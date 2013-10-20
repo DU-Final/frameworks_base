@@ -2070,4 +2070,28 @@
   <java-symbol type="id" name="busy_dlg_title" />
   <java-symbol type="layout" name="busy_dlg" />
 
+  <!-- Device specific handlers -->
+  <java-symbol type="string" name="config_deviceHandlersLib" />
+  <java-symbol type="string" name="config_deviceDockBatteryHandlerClass" />
+
+  <!-- Profiles -->
+  <java-symbol type="xml" name="profile_default" />
+  <java-symbol type="string" name="wildcardProfile" />
+  <java-symbol type="string" name="profile_picker_title" />
+  <java-symbol type="string" name="profile_none" />
+
+  <!-- Keyguard random NumPadKeys -->
+  <java-symbol type="string" name="keyboardview_keycode_random" />
+  <java-symbol type="id" name="key_random" />
+  <java-symbol type="id" name="key0" />
+  <java-symbol type="id" name="key1" />
+  <java-symbol type="id" name="key2" />
+  <java-symbol type="id" name="key3" />
+  <java-symbol type="id" name="key4" />
+  <java-symbol type="id" name="key5" />
+  <java-symbol type="id" name="key6" />
+  <java-symbol type="id" name="key7" />
+  <java-symbol type="id" name="key8" />
+  <java-symbol type="id" name="key9" />
+
 </resources>
