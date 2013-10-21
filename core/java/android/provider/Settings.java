@@ -2936,6 +2936,20 @@ public final class Settings {
         public static final String HIDE_STATUSBAR = "hide_statusbar";
 
         /**
+         * Peek at stausbar when it is hidden by swiping down from top
+         * end of the screen
+         *
+         * @hide
+         */
+        public static final String STATUSBAR_PEEK = "statusbar_peek";
+
+        /**
+         * Allows hidden swipe down statusbar timeout to be configured
+         * @hide
+         */
+        public static final String STATUSBAR_PEEK_TIMEOUT = "statusbar_peek_timeout";
+
+        /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
          * 1 = force on
