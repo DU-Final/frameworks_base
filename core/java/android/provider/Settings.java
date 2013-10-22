@@ -2950,6 +2950,13 @@ public final class Settings {
         public static final String STATUSBAR_PEEK_TIMEOUT = "statusbar_peek_timeout";
 
         /**
+         * User Interface State
+         * 1 = Rebuild UI, resets to 0 automatically
+         * @hide
+         */
+        public static final String USER_INTERFACE_STATE = "user_interface_state";
+
+        /**
          * Control the display of the action overflow button within app UI.
          * 0 = use system default
          * 1 = force on
