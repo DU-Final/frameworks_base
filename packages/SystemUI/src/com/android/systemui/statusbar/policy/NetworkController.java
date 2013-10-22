@@ -142,6 +142,8 @@ public class NetworkController extends BroadcastReceiver {
 
     private boolean mHideSignal;
     private boolean mUseAltSignal;
+    private boolean mHideAllSignals = false;
+    private boolean mLastHideAllSignals = false;
     private boolean mShow4gForLte;
 
     // our ui
@@ -338,15 +340,15 @@ public class NetworkController extends BroadcastReceiver {
     public void refreshSignalCluster(SignalCluster cluster) {
         cluster.setWifiIndicators(
                 // only show wifi in the cluster if connected or if wifi-only
-                mWifiEnabled && (mWifiConnected || !mHasMobileDataFeature),
+                !mHideAllSignals && (mWifiEnabled && (mWifiConnected || !mHasMobileDataFeature)),
                 mWifiIconId,
                 mWifiActivityIconId,
                 mContentDescriptionWifi);
 
         if (mIsWimaxEnabled && mWimaxConnected) {
-            // wimax is special
+            // wimax is NOT special
             cluster.setMobileDataIndicators(
-                    true,
+                    !mHideAllSignals,
                     mAlwaysShowCdmaRssi ? mPhoneSignalIconId : mWimaxIconId,
                     mMobileActivityIconId,
                     mDataTypeIconId,
@@ -355,7 +357,7 @@ public class NetworkController extends BroadcastReceiver {
         } else {
             // normal mobile data
             cluster.setMobileDataIndicators(
-                    mHasMobileDataFeature,
+                    !mHideAllSignals && mHasMobileDataFeature,
                     mShowPhoneRSSIForData ? mPhoneSignalIconId : mDataSignalIconId,
                     mMobileActivityIconId,
                     mDataTypeIconId,
@@ -867,6 +869,11 @@ public class NetworkController extends BroadcastReceiver {
             }
         }
 
+        if (mHideAllSignals){
+            iconId = 0;
+            visible = false;
+        }
+
         // yuck - this should NOT be done by the status bar
         long ident = Binder.clearCallingIdentity();
         try {
@@ -1299,7 +1306,8 @@ public class NetworkController extends BroadcastReceiver {
          || mLastWimaxIconId                != mWimaxIconId
          || mLastDataTypeIconId             != mDataTypeIconId
          || mLastAirplaneMode               != mAirplaneMode
-         || mLastLocale                     != mLocale)
+         || mLastLocale                     != mLocale
+         || mLastHideAllSignals             != mHideAllSignals)
         {
             // NB: the mLast*s will be updated later
             for (SignalCluster cluster : mSignalClusters) {
@@ -1308,6 +1316,10 @@ public class NetworkController extends BroadcastReceiver {
             for (NetworkSignalChangedCallback cb : mSignalsChangedCallbacks) {
                 notifySignalsChangedCallbacks(cb);
             }
+        }
+
+        if (mLastHideAllSignals != mHideAllSignals) {
+             mLastHideAllSignals = mHideAllSignals;
         }
 
         if (mLastAirplaneMode != mAirplaneMode) {
@@ -1629,6 +1641,9 @@ public class NetworkController extends BroadcastReceiver {
                     Settings.System.getUriFor(Settings.System.STATUSBAR_SIGNAL_SHOW_4G_FOR_LTE),
                     mContext.getResources().getBoolean(R.bool.config_show4GForLTE),
                     this);
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.STATUSBAR_HIDE_ALL_SIGNAL_BARS), false,
+                    this);
             updateSettings();
         }
 
@@ -1644,9 +1659,12 @@ public class NetworkController extends BroadcastReceiver {
                 Settings.System.STATUSBAR_HIDE_SIGNAL_BARS,false));
         mUseAltSignal = (Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.STATUSBAR_SIGNAL_CLUSTER_ALT, clustdefault));
+        mHideAllSignals = (Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.STATUSBAR_HIDE_ALL_SIGNAL_BARS,false));
         mShow4gForLte = (Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.STATUSBAR_SIGNAL_SHOW_4G_FOR_LTE,
                 mContext.getResources().getBoolean(R.bool.config_show4GForLTE)));
+
         updateTelephonySignalStrength();
         updateDataNetType();
         updateDataIcon();
