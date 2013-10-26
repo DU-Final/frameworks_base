@@ -87,7 +87,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.ExtendedPropertiesUtils;
 import android.util.Log;
 import android.util.Slog;
 import android.view.Display;
@@ -125,6 +124,8 @@ public abstract class BaseStatusBar extends SystemUI implements
     protected static final int MSG_CLOSE_SEARCH_PANEL = 1025;
     protected static final int MSG_SHOW_INTRUDER = 1026;
     protected static final int MSG_HIDE_INTRUDER = 1027;
+
+    protected int mCurrentUIMode;
 
     private WidgetView mWidgetView;
     private AppWindow mAppWindow;
@@ -181,7 +182,6 @@ public abstract class BaseStatusBar extends SystemUI implements
     // Policy
     public NetworkController mNetworkController;
     public BatteryController mBatteryController;
-    public int mSystemUiLayout = ExtendedPropertiesUtils.getActualProperty("com.android.systemui.layout");
 
     // UI-specific methods
 
@@ -375,6 +375,9 @@ public abstract class BaseStatusBar extends SystemUI implements
 
         mLocale = mContext.getResources().getConfiguration().locale;
         mLayoutDirection = TextUtils.getLayoutDirectionFromLocale(mLocale);
+
+        mCurrentUIMode = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.CURRENT_UI_MODE,0);
 
         // Connect in to the status bar manager service
         StatusBarIconList iconList = new StatusBarIconList();
@@ -890,18 +893,20 @@ public abstract class BaseStatusBar extends SystemUI implements
 
         // Provide SearchPanel with a temporary parent to allow layout params to work.
         LinearLayout tmpRoot = new LinearLayout(mContext);
-
-        if (mSystemUiLayout >= 1000) {  // Device is Tablet 
-            mSearchPanelView = (SearchPanelView) LayoutInflater.from(mContext).inflate(
-                    R.layout.status_bar_search_panel_tablet, tmpRoot, false);
-        } else if (mSystemUiLayout >= 600) {  // Device uses Phablet UI
-            mSearchPanelView = (SearchPanelView) LayoutInflater.from(mContext).inflate(
-                    R.layout.status_bar_search_panel_phablet, tmpRoot, false);
-        } else {  // Device is Phone 
-            mSearchPanelView = (SearchPanelView) LayoutInflater.from(mContext).inflate(
+        switch (mCurrentUIMode) {
+            case 0 :  // Phone Mode
+                mSearchPanelView = (SearchPanelView) LayoutInflater.from(mContext).inflate(
                     R.layout.status_bar_search_panel, tmpRoot, false);
+                break;
+            case 1 : // Tablet Mode
+                mSearchPanelView = (SearchPanelView) LayoutInflater.from(mContext).inflate(
+                    R.layout.status_bar_search_panel_tablet, tmpRoot, false);
+                break;
+            case 2 : // Phablet Mode
+                mSearchPanelView = (SearchPanelView) LayoutInflater.from(mContext).inflate(
+                    R.layout.status_bar_search_panel_phablet, tmpRoot, false);
+                break;    
         }
-
         mSearchPanelView.setOnTouchListener(
                  new TouchOutsideListener(MSG_CLOSE_SEARCH_PANEL, mSearchPanelView));
         mSearchPanelView.setVisibility(View.GONE);
