@@ -165,7 +165,7 @@ public abstract class Layout {
                               int width, Alignment align,
                               float spacingmult, float spacingadd) {
         if (width < 0) {
-           	width = 0; 
+            width = 0;
         }
 
         mText = text;
