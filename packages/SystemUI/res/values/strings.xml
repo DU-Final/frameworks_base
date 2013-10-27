@@ -570,8 +570,6 @@
     <string name="halo_signal_bars_1">ONE BAR</string>
     <string name="halo_signal_bars_none">NO BARS</string>
 
-    <!--  AOKP Strings can go here... -->
-
     <!--  App window Strings -->
     <string name="close">Close</string>
     <string name="app_window">Applications</string>
@@ -592,7 +590,6 @@
     <string name="action_notifications">Notifications</string>
     <string name="action_lastapp">Last App</string>
     <string name="action_none">Empty</string>
-
     <string name="widgets">Widgets</string>
     <string name="toggle_quiethours">QuietHours - Toggle</string>
     <string name="toggle_navbar">NavBar - Toggle</string>
