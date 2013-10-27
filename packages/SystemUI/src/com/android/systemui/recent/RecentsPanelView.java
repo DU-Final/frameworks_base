@@ -548,6 +548,7 @@ public class RecentsPanelView extends FrameLayout implements OnClickListener, On
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+
         mRecentsContainer = (ViewGroup) findViewById(R.id.recents_container);
         mStatusBarTouchProxy = (StatusBarTouchProxy) findViewById(R.id.status_bar_touch_proxy);
         mListAdapter = new TaskDescriptionAdapter(mContext);
@@ -929,6 +930,8 @@ public class RecentsPanelView extends FrameLayout implements OnClickListener, On
         ViewHolder holder = (ViewHolder)view.getTag();
         TaskDescription ad = holder.taskDescription;
         final Context context = view.getContext();
+        final ActivityManager am = (ActivityManager)
+                context.getSystemService(Context.ACTIVITY_SERVICE);
         Bitmap bm = holder.thumbnailViewImageBitmap;
         boolean usingDrawingCache;
         if (bm.getWidth() == holder.thumbnailViewImage.getWidth() &&
@@ -945,9 +948,20 @@ public class RecentsPanelView extends FrameLayout implements OnClickListener, On
                         holder.thumbnailViewImage, bm, 0, 0, null).toBundle();
 
         show(false);
+
         if (ad.taskId >= 0) {
             // This is an active task; it should just go to the foreground.
-            mAm.moveTaskToFront(ad.taskId, ActivityManager.MOVE_TASK_WITH_HOME,
+            // If that task was split viewed, a normal press wil resume it to
+            // normal fullscreen view
+            IWindowManager wm = (IWindowManager) WindowManagerGlobal.getWindowManagerService();
+            try {
+                if (DEBUG) Log.v(TAG, "Restoring window full screen after split, because of normal tap");
+                wm.setTaskSplitView(ad.taskId, false);
+            } catch (RemoteException e) {
+                Log.e(TAG, "Could not setTaskSplitView to fullscreen", e);
+            }
+
+            am.moveTaskToFront(ad.taskId, ActivityManager.MOVE_TASK_WITH_HOME,
                     opts);
         } else {
             Intent intent = ad.intent;
@@ -991,8 +1005,10 @@ public class RecentsPanelView extends FrameLayout implements OnClickListener, On
 
         // Currently, either direction means the same thing, so ignore direction and remove
         // the task.
-        if (mAm != null) {
-            mAm.removeTask(ad.persistentTaskId, ActivityManager.REMOVE_TASK_KILL_PROCESS);
+        final ActivityManager am = (ActivityManager)
+                mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        if (am != null) {
+            am.removeTask(ad.persistentTaskId, ActivityManager.REMOVE_TASK_KILL_PROCESS);
 
             // Accessibility feedback
             setContentDescription(
