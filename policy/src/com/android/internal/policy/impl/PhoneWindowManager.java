@@ -469,7 +469,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     boolean mForcingShowNavBar;
     int mForcingShowNavBarLayer;
 
-    boolean mHideStatusBar;
+    boolean mStatusBarAutoHide;
 
     // States of keyguard dismiss.
     private static final int DISMISS_KEYGUARD_NONE = 0; // Keyguard not being dismissed.
@@ -691,7 +691,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HARDWARE_KEY_REBINDING), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.HIDE_STATUSBAR), false, this);
+                    Settings.System.AUTO_HIDE_STATUSBAR), false, this);
             updateSettings();
         }
 
@@ -3963,9 +3963,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 // and mTopIsFullscreen is that that mTopIsFullscreen is set only if the window
                 // has the FLAG_FULLSCREEN set.  Not sure if there is another way that to be the
                 // case though.
-                mHideStatusBar = Settings.System.getInt(mContext.getContentResolver(),
-                        Settings.System.HIDE_STATUSBAR, 0) == 1;
-                if (topIsFullscreen || mHideStatusBar || (Settings.System.getInt(mContext.getContentResolver(),
+                mStatusBarAutoHide = Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.AUTO_HIDE_STATUSBAR, 0) == 1;
+                if (topIsFullscreen || mStatusBarAutoHide || (Settings.System.getInt(mContext.getContentResolver(),
                                         Settings.System.EXPANDED_DESKTOP_STATE, 0) == 1 &&
                                         Settings.System.getInt(mContext.getContentResolver(),
                                         Settings.System.EXPANDED_DESKTOP_STYLE, 0) == 2)) {

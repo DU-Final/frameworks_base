@@ -1048,11 +1048,11 @@ public class PhoneStatusBar extends BaseStatusBar {
         if (Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.AUTO_HIDE_STATUSBAR, 0) == 1) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HIDE_STATUSBAR,
+                    Settings.System.STATUSBAR_HIDDEN,
                     (mNotificationData.size() == 0) ? 1 : 0);
         } else {
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HIDE_STATUSBAR, 0);
+                    Settings.System.STATUSBAR_HIDDEN, 0);
         }
     }
 
@@ -3128,9 +3128,9 @@ public class PhoneStatusBar extends BaseStatusBar {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.WEATHER_PANEL_LONGCLICK), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.AUTO_HIDE_STATUSBAR), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_CARRIER), false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.AUTO_HIDE_STATUSBAR), false, this);
         }
 
          @Override
